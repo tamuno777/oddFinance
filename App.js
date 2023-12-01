@@ -6,12 +6,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Slider from './components/slider';
 import Country from './components/signupscreen/county';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 
 const Stack = createNativeStackNavigator();
 const {width,height} = Dimensions.get('window')
 export default function App() {
   
   return (
+    <GestureHandlerRootView>
     <NavigationContainer >
       <Stack.Navigator >
         <Stack.Screen
@@ -69,6 +72,7 @@ export default function App() {
          component={Info} />
       </Stack.Navigator>
     </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 
