@@ -29,7 +29,7 @@ const slides =[
   ]
   const Slide = ({item}) => {
     return(
-        <View style={{alignItems:"center"}}>
+        <View style={{alignItems:"center",width:width}}>
             <Image source={item.image} style={styles.image}/>
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.subtitle}>{item.subtitle}</Text>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
       display: "flex",
       alignItems: 'center',
       justifyContent: 'center',
-      width:width,
+      width:width/1.5,
       height:"75%",
       resizeMode:"contain"
     },

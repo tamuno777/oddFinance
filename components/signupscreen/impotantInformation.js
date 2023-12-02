@@ -16,68 +16,34 @@ const {width,height} = Dimensions.get('window')
 const country =[
     {
       value:"1",
-      image: require("../../assets/emojione_flag-for-united-kingdom.png"),
-      title:"United Kingdom ",
+      title:"Male ",
     },
     {
         value:"2",
-      image: require("../../assets/emojione_flag-for-united-states.png"),
-      title:"United state",
+      title:"Female",
     },
     {
         value:"3",
-      image: require("../../assets/emojione_flag-for-germany.png"),
-      title:"Germany",
+      title:"Other",
     },
-    {
-        value:"4",
-      image: require("../../assets/emojione_flag-for-china.png"),
-      title:"China",
-    },
-    {
-        value:"5",
-      image: require("../../assets/emojione_flag-for-nigeria.png"),
-      title:"Nigeria",
-    },
-    {
-        value:"6",
-      image: require("../../assets/emojione_flag-for-india.png"),
-      title:"India",
-    },
-    {
-        value:"7",
-      image: require("../../assets/emojione_flag-for-south-korea.png"),
-      title:"Korea",
-    },
+  
   ]
   const Locationn = ({item}) => {
     return(
-        <View style={{alignItems:"center",flexDirection:"row",gap:6,paddingVertical:16}}>
-            <Image source={item.image} style={styles.image}/>
+        <View style={{alignItems:"center",flexDirection:"column",paddingVertical:16}}>
             <Text style={{fontSize:20}}>{item.title}</Text>
 
         </View>
     )
 
   }
-export default function Country() {
+export default function Information() {
   const navigation = useNavigation()
   const [isModalVisible , setIsModalVisible] = React.useState(false)
-   // ref
-   const bottomSheetRef = useRef<BottomSheet>(null);
 
    // variables
    const snapPoints = useMemo(() => [ '50%'], []);
  
-   // callbacks
-//    const handlePresentModalPress = useCallback(() => {
-//      bottomSheetModalRef.current?.present();
-//    }, []);
-   const handleSheetChanges = useCallback((index) => {
-     console.log('handleSheetChanges', index);
-   }, []);
-   const handleopen = () => bottomSheetRef.current?.expand();
-    // renders
   const renderBackdrop = useCallback(
     props => (
       <BottomSheetBackdrop
@@ -92,11 +58,11 @@ export default function Country() {
   const Footer = ()=>{
     return  <View style={{height:height * 0.002, justifyContent:"space-between",paddingHorizontal:20,}}>
           <View style={{flexDirection:"row",justifyContent:"center",marginTop:-20,}}>
+          <View style={styles.indicator}></View>
             <View 
             style={[styles.indicator,{backgroundColor:"blue",
             width:30,
             borderRadius:8,}]}></View>
-            <View style={styles.indicator}></View>
             <View style={styles.indicator}></View>
             <View style={styles.indicator}></View>
             
@@ -108,7 +74,7 @@ export default function Country() {
     
     return  <View style={{height:height * 0.1,marginBottom:20, justifyContent:"center",paddingHorizontal:30,width:"100%" }}>
           <TouchableOpacity style={{flexDirection:"column",justifyContent:"space-between",gap:10,}}>
-              <Pressable onPress={()=>{ navigation.navigate("Information")}}>
+              <Pressable onPress={()=>{ navigation.navigate("CreatePassword")}}>
               <Text style={styles.create__btn}>
               Continue
               </Text>
@@ -124,21 +90,40 @@ export default function Country() {
 
     <StatusBar style="dark" backgroundColor="white" translucent={true} />
     <View style={{
-        height:height * 0.7,
+        height:height * 0.7 ,
 
     }}>
     <Footer/>
     <View style={styles.country__div}>
-      <Text style={{fontSize:32,fontWeight:"600",flexWrap:"wrap",width:"90%"}}>What country do you live in ?</Text>
-        <Text style={styles.label}>Country</Text>
+    <Text style={{fontSize:32,fontWeight:"600",flexWrap:"wrap",width:"90%",marginBottom:10}}>Impotant Information</Text>
+        <View style={{marginVertical:10}}>
+            <Text >Full name</Text>
+            <TextInput placeholder='Enter your full name'  style={styles.search__Input}/>
+
+        </View>
+
+        <View style={{marginVertical:10}}>
+        <Text>Gender</Text>
 
         <Pressable onPress={()=> setIsModalVisible(!isModalVisible)}>
             <View style={styles.TextInput}
 >
-                <Text   style={styles.TextInput__text}>Nigeria</Text>
+                <Text   style={styles.TextInput__text}>Choose your gender</Text>
             </View>
 
         </Pressable>
+        </View>
+
+        <View style={{marginVertical:10}}>
+            <Text>Email</Text>
+            <TextInput placeholder='Enter your email address'  style={styles.search__Input}/>
+
+        </View>
+        <View style={{marginVertical:10}}>
+            <Text>Enter ypur phone number</Text>
+            <TextInput placeholder='(+345) 47 3984 7489'  style={styles.search__Input}/>
+
+        </View>
       
     </View>
 
@@ -159,8 +144,7 @@ export default function Country() {
           <View style={styles.control}></View>
 
           </View>
-        <TextInput placeholder='Search Country'  style={styles.search__Input}/>
-        <Text  style={styles.modal__text_header}>Choose Your Country</Text>
+        <Text  style={styles.modal__text_header}>Choose Your Gender</Text>
       <View>
       <FlatList
     pagingEnabled
@@ -253,9 +237,11 @@ const styles = StyleSheet.create({
         borderRadius:10,
         width:width * 0.9,
       
-      paddingHorizontal:12,
-      paddingVertical:15,
+      paddingHorizontal:10,
+      paddingVertical:10,
       borderRadius:10,
+      marginTop:10,
+
             
     },
     control:{
@@ -274,10 +260,10 @@ const styles = StyleSheet.create({
         borderRadius:10,
         width:width * 0.9,
       
-      paddingHorizontal:12,
-      paddingVertical:12,
+      paddingHorizontal:10,
+      paddingVertical:10,
       borderRadius:10,
-      marginBottom:15,
+      marginTop:10,
             
     },
     TextInput__text:{
@@ -298,10 +284,10 @@ const styles = StyleSheet.create({
         marginTop: 'auto',
         flex:1,
         backgroundColor:"gray",
-        maxHeight: height / 1.32, // Set the maximum height as half of the screen height
+        maxHeight: height / 2.6, // Set the maximum height as half of the screen height
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-        padding:10,
+        padding:15,
         width:"100%",
         // justifyContent:"flex-start",
         // borderWidth:1,

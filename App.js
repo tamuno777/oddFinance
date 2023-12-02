@@ -6,7 +6,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Slider from './components/slider';
 import Country from './components/signupscreen/county';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { GestureHandlerRootView,TapGestureHandler } from 'react-native-gesture-handler';
+import Information from './components/signupscreen/impotantInformation';
+import CreatePassword from './components/signupscreen/createPassword';
+import PhoneVerification from './components/signupscreen/phoneVerification';
 
 
 const Stack = createNativeStackNavigator();
@@ -14,7 +17,7 @@ const {width,height} = Dimensions.get('window')
 export default function App() {
   
   return (
-    <GestureHandlerRootView>
+  
     <NavigationContainer >
       <Stack.Navigator >
         <Stack.Screen
@@ -55,11 +58,67 @@ export default function App() {
         }}
          component={Country} />
         <Stack.Screen
-         name="Info" 
+         name="Information" 
          options={{
           title: "",
           headerStyle: {
             backgroundColor: "white",              
+          },
+          headerTitleStyle: {
+            color: 'white',
+            borderWidth: 0, 
+            borderBottomWidth: 0,
+            elevation:0, 
+          },
+          contentStyle:{
+            backgroundColor:"white"
+          },
+          headerShadowVisible:false,
+        }}
+         component={Information} />
+        <Stack.Screen
+         name="CreatePassword" 
+         options={{
+          title: "",
+          headerStyle: {
+            backgroundColor: "white",              
+          },
+          headerTitleStyle: {
+            color: 'white',
+            borderWidth: 0, 
+            borderBottomWidth: 0,
+            elevation:0, 
+          },
+          contentStyle:{
+            backgroundColor:"white"
+          },
+          headerShadowVisible:false,
+        }}
+         component={CreatePassword} />
+        <Stack.Screen
+         name="PhoneVerification" 
+         options={{
+          title: "",
+          headerStyle: {
+            backgroundColor: "white",              
+          },
+          headerTitleStyle: {
+            color: 'white',
+            borderWidth: 0, 
+            borderBottomWidth: 0,
+            elevation:0, 
+          },
+          contentStyle:{
+            backgroundColor:"white"
+          },
+          headerShadowVisible:false,
+        }}
+         component={PhoneVerification} />
+        <Stack.Screen
+         name="Info" 
+         options={{
+          title: "",
+          headerStyle: {
           },
           headerTitleStyle: {
             color: 'blue',
@@ -72,7 +131,7 @@ export default function App() {
          component={Info} />
       </Stack.Navigator>
     </NavigationContainer>
-    </GestureHandlerRootView>
+   
   );
 }
 
