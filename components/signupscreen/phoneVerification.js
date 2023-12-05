@@ -4,10 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar';
 import { Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import BottomSheet, { BottomSheetBackdrop, BottomSheetView } from '@gorhom/bottom-sheet';
-// import {BottomSheetPicker} from 'react-native-bottom-sheet-picker';
-
-
 
 const {width,height} = Dimensions.get('window')
 
