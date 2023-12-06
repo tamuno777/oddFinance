@@ -11,7 +11,8 @@ import Information from './components/signupscreen/impotantInformation';
 import CreatePassword from './components/signupscreen/createPassword';
 import PhoneVerification from './components/signupscreen/phoneVerification';
 import PinSetup from './components/signupscreen/pinSetup';
-import ToastProvider from './context/toast/toastProvider';
+import ToastProvider from './context/toast/notificationtoast';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -21,7 +22,7 @@ export default function App() {
   return (
   
     <NavigationContainer >
-      <ToastProvider>
+      {/* <ToastProvider> */}
       <Stack.Navigator >
         <Stack.Screen
           name="Slider"
@@ -152,7 +153,7 @@ export default function App() {
         }}
          component={Info} />
       </Stack.Navigator>
-      </ToastProvider>
+      {/* </ToastProvider> */}
     </NavigationContainer>
    
   );

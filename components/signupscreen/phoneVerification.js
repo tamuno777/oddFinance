@@ -1,15 +1,19 @@
-import React, { useRef,useEffect } from 'react';
-import { View ,StyleSheet,Dimensions, Text, Alert, TouchableOpacity, KeyboardAvoidingView, TextInput, Modal, TouchableWithoutFeedback} from 'react-native'
+import React, { useRef,useState } from 'react';
+import { View ,StyleSheet,Dimensions, Text, Alert, TouchableOpacity, KeyboardAvoidingView, TextInput, Modal, ToastAndroid} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar';
 import { Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { showMessage } from 'react-native-toast-message';
+import Toast from 'react-native-toast-message';
+
 
 
 const {width,height} = Dimensions.get('window')
 
 export default function PhoneVerification() {
+  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(false);
+
   const navigation = useNavigation()
     const firstInput = useRef()
     const secondInput = useRef()
@@ -17,64 +21,56 @@ export default function PhoneVerification() {
     const fourthInput = useRef()
     const fiveInput = useRef()
     const sixthInput = useRef()
-    const showToast = (message, type) => {
-      const toastConfig = {
-        message,
-        type,
-        position: 'top',
-        autoHide: true,
-        duration: 5000, // 5 seconds
-        floating: true,
-        style: {
-          backgroundColor: type === 'success' ? 'green' : 'red',
-          borderRadius: 8,
-          borderStyle: 'solid',
-          borderWidth: 2,
-          borderColor: type === 'success' ? 'green' : 'red',
-        },
-        titleStyle: {
-          color: type === 'success' ? 'green' : 'red',
-        },
-      };
-    
-      showMessage(toastConfig);
-    };
-
-    // const showAlert = (message, type) => {
-    //   // Customize alert styling based on success or error
-    //   const alertStyle = type === 'success' ? { borderColor: 'green',borderWidth:3 ,color:"green"} : { borderColor: 'red',borderWidth:3,color:"red" };
-  
-    //   Alert.alert(
-    //     '',
-    //     message,
-    //     [{ text: 'OK', onPress: () => handleAlertDismissed(type) }],
-    //     { cancelable: false, style: 'default', customStyles: alertStyle }
-    //   );
-    // };
-    // const handleAlertDismissed = (type) => {
-    //   // Navigation logic after alert is dismissed
-    //   if (type === 'success') {
-    //     navigation.navigate('PinSetup'); 
-    //   }
-    // };
     const handleRegistration = async () => {
-      // Simulate asynchronous registration
-      try {
-        // Your registration logic here...
+      // Simulate API call
+      // const successful = await simulateRegistration();
+      setIsRegistrationSuccessful(true);
   
-        // Show success alert
-        showToast('Registration successful!', 'success');
+      // Show Toast message
+      if (isRegistrationSuccessful) {
+        Toast.show({
+          type: 'success',
+          text1: 'Registration Successful!',
+          text2: 'Welcome to the app!',
+          color: 'green',
+          position: 'top',
+          style: {
+            backgroundColor: '#00FF00', 
+            color: 'green',
+            zIndex:20
 
+           
+          },
+         
+          visibilityTime: 2000, // Time in milliseconds
+        }, ToastAndroid.SHORT);
         setTimeout(() => {
-          if (type === 'success') {
+          // if (isRegistrationSuccessful) {
                 navigation.navigate('PinSetup'); 
-              }
+              // }
 
-      }, 2000);
+      }, 3000);
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: 'Registration Failed!',
+          text2: 'Please try again later.',
+          backgroundColor:"white",
+          color: '#FF0000',
+          style: {
+            backgroundColor: '#FF0000', 
+            color: '#FF0000',
+            zIndex:20
 
-      } catch (error) {
-        // Show error alert
-        showToast('Registration failed. Please try again.', 'error');
+            // borderRadius:8,
+          // borderColor:"red",
+
+          },
+          position: 'top',
+          visibilityTime: 2000, // Time in milliseconds
+
+        
+        }, ToastAndroid.SHORT);
       }
     };
  
@@ -120,6 +116,14 @@ export default function PhoneVerification() {
         height:height * 0.7 ,
 
     }}>
+      <View style={{ zIndex: 100 }}>
+
+       <Toast
+        position='top'
+        topOffset={20}
+      />
+      </View>
+
     <Footer/>
     <View style={styles.country__div}>
     <Text style={{fontSize:32,fontWeight:"600",flexWrap:"wrap",width:"90%",marginBottom:7}}>Verify phone number</Text>
