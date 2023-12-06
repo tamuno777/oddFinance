@@ -10,6 +10,8 @@ import { GestureHandlerRootView,TapGestureHandler } from 'react-native-gesture-h
 import Information from './components/signupscreen/impotantInformation';
 import CreatePassword from './components/signupscreen/createPassword';
 import PhoneVerification from './components/signupscreen/phoneVerification';
+import PinSetup from './components/signupscreen/pinSetup';
+import ToastProvider from './context/toast/toastProvider';
 
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +21,7 @@ export default function App() {
   return (
   
     <NavigationContainer >
+      <ToastProvider>
       <Stack.Navigator >
         <Stack.Screen
           name="Slider"
@@ -115,6 +118,25 @@ export default function App() {
         }}
          component={PhoneVerification} />
         <Stack.Screen
+         name="PinSetup" 
+         options={{
+          title: "",
+          headerStyle: {
+            backgroundColor: "white",              
+          },
+          headerTitleStyle: {
+            color: 'white',
+            borderWidth: 0, 
+            borderBottomWidth: 0,
+            elevation:0, 
+          },
+          contentStyle:{
+            backgroundColor:"white"
+          },
+          headerShadowVisible:false,
+        }}
+         component={PinSetup} />
+        <Stack.Screen
          name="Info" 
          options={{
           title: "",
@@ -130,6 +152,7 @@ export default function App() {
         }}
          component={Info} />
       </Stack.Navigator>
+      </ToastProvider>
     </NavigationContainer>
    
   );

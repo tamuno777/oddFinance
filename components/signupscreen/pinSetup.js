@@ -1,5 +1,5 @@
-import React, { useRef,useEffect } from 'react';
-import { View ,StyleSheet,Dimensions, Text, Alert, TouchableOpacity, KeyboardAvoidingView, TextInput, Modal, TouchableWithoutFeedback} from 'react-native'
+import React, { useRef } from 'react';
+import { View ,StyleSheet,Dimensions, Text, Alert, TouchableOpacity, KeyboardAvoidingView, TextInput} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar';
 import { Pressable } from 'react-native';
@@ -9,7 +9,7 @@ import { showMessage } from 'react-native-toast-message';
 
 const {width,height} = Dimensions.get('window')
 
-export default function PhoneVerification() {
+export default function PinSetup() {
   const navigation = useNavigation()
     const firstInput = useRef()
     const secondInput = useRef()
@@ -17,70 +17,26 @@ export default function PhoneVerification() {
     const fourthInput = useRef()
     const fiveInput = useRef()
     const sixthInput = useRef()
-    const showToast = (message, type) => {
-      const toastConfig = {
-        message,
-        type,
-        position: 'top',
-        autoHide: true,
-        duration: 5000, // 5 seconds
-        floating: true,
-        style: {
-          backgroundColor: type === 'success' ? 'green' : 'red',
-          borderRadius: 8,
-          borderStyle: 'solid',
-          borderWidth: 2,
-          borderColor: type === 'success' ? 'green' : 'red',
-        },
-        titleStyle: {
-          color: type === 'success' ? 'green' : 'red',
-        },
-      };
-    
-      showMessage(toastConfig);
-    };
+   
 
-    // const showAlert = (message, type) => {
-    //   // Customize alert styling based on success or error
-    //   const alertStyle = type === 'success' ? { borderColor: 'green',borderWidth:3 ,color:"green"} : { borderColor: 'red',borderWidth:3,color:"red" };
+    // const handleRegistration = () => {
+    //   // Perform registration logic here
   
+    //   // Assuming registration is successful, show alert and navigate to sign-in screen
     //   Alert.alert(
-    //     '',
-    //     message,
-    //     [{ text: 'OK', onPress: () => handleAlertDismissed(type) }],
-    //     { cancelable: false, style: 'default', customStyles: alertStyle }
+    //     'Registration Successful',
+    //     [
+    //       {
+    //         text: 'OK',
+    //         onPress: () => {
+    //           // Navigate to the sign-in screen
+    //           navigation.navigate('PinSetup'); // Replace 'SignIn' with the name of your sign-in screen
+    //         },
+    //       },
+    //     ]
     //   );
     // };
-    // const handleAlertDismissed = (type) => {
-    //   // Navigation logic after alert is dismissed
-    //   if (type === 'success') {
-    //     navigation.navigate('PinSetup'); 
-    //   }
-    // };
-    const handleRegistration = async () => {
-      // Simulate asynchronous registration
-      try {
-        // Your registration logic here...
-  
-        // Show success alert
-        showToast('Registration successful!', 'success');
-
-        setTimeout(() => {
-          if (type === 'success') {
-                navigation.navigate('PinSetup'); 
-              }
-
-      }, 2000);
-
-      } catch (error) {
-        // Show error alert
-        showToast('Registration failed. Please try again.', 'error');
-      }
-    };
  
-    
-
-
   const Footer = ()=>{
     return  <View style={{height:height * 0.002, justifyContent:"space-between",paddingHorizontal:20,}}>
           <View style={{flexDirection:"row",justifyContent:"center",marginTop:-20,}}>
@@ -101,9 +57,9 @@ export default function PhoneVerification() {
     
     return  <View style={{height:height * 0.1,marginBottom:20, justifyContent:"center",paddingHorizontal:30,width:"100%" }}>
           <TouchableOpacity style={{flexDirection:"column",justifyContent:"space-between",gap:10,}}>
-              <Pressable onPress={handleRegistration} >
+              <Pressable >
               <Text style={styles.create__btn}>
-              Finish
+              Continue
               </Text>
               </Pressable>
              
@@ -120,9 +76,9 @@ export default function PhoneVerification() {
         height:height * 0.7 ,
 
     }}>
-    <Footer/>
+    {/* <Footer/> */}
     <View style={styles.country__div}>
-    <Text style={{fontSize:32,fontWeight:"600",flexWrap:"wrap",width:"90%",marginBottom:7}}>Verify phone number</Text>
+    <Text style={{fontSize:32,fontWeight:"600",flexWrap:"wrap",width:"90%",marginBottom:7}}>Pin setup noig</Text>
     <Text style={{fontSize:13,fontWeight:"400",flexWrap:"wrap",width:"99%",marginBottom:10}}>Please enter the OTP sent to +23481 2345 5436</Text>
         <View style={{marginVertical:30,flexDirection:"row",justifyContent:"space-around",width:"100%"}}>
             

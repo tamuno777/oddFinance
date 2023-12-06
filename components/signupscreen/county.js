@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     image: {
       display: "flex",
       alignItems: 'flex-start',
-      justifyContent: 'flext-start',
+      // justifyContent: 'flext-start',
       height:"100%",
       width: 50,
       resizeMode:"contain"
