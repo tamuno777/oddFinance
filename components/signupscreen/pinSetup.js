@@ -1,15 +1,66 @@
 import React, { useRef } from 'react';
-import { View ,StyleSheet,Dimensions, Text, Alert, TouchableOpacity, KeyboardAvoidingView, TextInput} from 'react-native'
+import { View ,StyleSheet,Dimensions, Text, Alert, TouchableOpacity, KeyboardAvoidingView, TextInput, FlatList} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar';
 import { Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { showMessage } from 'react-native-toast-message';
+import { Image } from 'react-native';
 
 
 const {width,height} = Dimensions.get('window')
 
 export default function PinSetup() {
+  const dailPad = [ 
+    {
+      id:"1",
+    value :"1"
+  },
+    {
+      id:"2",
+    value :"2"
+  },
+    {
+      id:"3",
+    value :"3"
+  },
+    {
+      id:"4",
+    value :"4"
+  },
+    {
+      id:"5",
+    value :"5"
+  },
+    {
+      id:"6",
+    value :"6"
+  },
+    {
+      id:"7",
+    value :"7"
+  },
+    {
+      id:"8",
+    value :"8"
+  },
+    {
+      id:"9",
+    value :"9"
+  },
+    {
+      id:"10",
+    value :""
+  },
+    {
+      id:"11",
+    value :"0"
+  },
+    {
+      id:"11",
+    value: require("../../assets/cancle.png"),
+  },
+  ]
   const navigation = useNavigation()
     const firstInput = useRef()
     const secondInput = useRef()
@@ -18,24 +69,6 @@ export default function PinSetup() {
     const fiveInput = useRef()
     const sixthInput = useRef()
    
-
-    // const handleRegistration = () => {
-    //   // Perform registration logic here
-  
-    //   // Assuming registration is successful, show alert and navigate to sign-in screen
-    //   Alert.alert(
-    //     'Registration Successful',
-    //     [
-    //       {
-    //         text: 'OK',
-    //         onPress: () => {
-    //           // Navigate to the sign-in screen
-    //           navigation.navigate('PinSetup'); // Replace 'SignIn' with the name of your sign-in screen
-    //         },
-    //       },
-    //     ]
-    //   );
-    // };
  
   const Footer = ()=>{
     return  <View style={{height:height * 0.002, justifyContent:"space-between",paddingHorizontal:20,}}>
@@ -51,6 +84,26 @@ export default function PinSetup() {
             
             
           </View>
+    </View>
+  }
+  const Dailpad = ()=>{
+    return  <View >
+      <FlatList
+      style={{flexGrow:0}}
+      scrollEnabled={false}
+      numColumns={3}
+      data={dailPad}
+      keyExtractor={dailPad.id}
+      renderItem={({item}) =>{
+        return <TouchableOpacity onPress={() =>{}}>
+          <Image />
+
+
+        </TouchableOpacity>
+      }}
+      />
+          <View style={styles.dailPad}></View>
+          
     </View>
   }
   const Authdiv = ()=>{
@@ -152,8 +205,7 @@ export default function PinSetup() {
         </View>
 
         <View style={{marginVertical:10,alignItems:"center",width:"100%"}}>
-            <Text  >Didnt get the code?</Text>
-            <Text style={{color:"#0075FE"}}>Resend code!</Text>
+            <Text  >Dail pad</Text>
 
         </View>
       
