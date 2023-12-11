@@ -9,7 +9,7 @@ import { Image } from 'react-native';
 
 
 const {width,height} = Dimensions.get('window')
-
+const dailPadSize =width * .2
 export default function PinSetup() {
   const dailPad = [ 
     {
@@ -58,7 +58,8 @@ export default function PinSetup() {
   },
     {
       id:"11",
-    value: require("../../assets/cancle.png"),
+    // value: require("../../assets/cancle.png"),
+    value: "del",
   },
   ]
   const navigation = useNavigation()
@@ -69,40 +70,41 @@ export default function PinSetup() {
     const fiveInput = useRef()
     const sixthInput = useRef()
    
- 
-  const Footer = ()=>{
-    return  <View style={{height:height * 0.002, justifyContent:"space-between",paddingHorizontal:20,}}>
-          <View style={{flexDirection:"row",justifyContent:"center",marginTop:-20,}}>
-          <View style={styles.indicator}></View>
-          <View style={styles.indicator}></View>
-          <View style={styles.indicator}></View>
 
-            <View 
-            style={[styles.indicator,{backgroundColor:"blue",
-            width:30,
-            borderRadius:8,}]}></View>
-            
-            
-          </View>
-    </View>
-  }
   const Dailpad = ()=>{
-    return  <View >
+    return  <View style={{height:height /2.3}}>
       <FlatList
       style={{flexGrow:0}}
       scrollEnabled={false}
       numColumns={3}
+      columnWrapperStyle={{gap:10}}
+      contentContainerStyle={{gap:10}}
       data={dailPad}
       keyExtractor={dailPad.id}
       renderItem={({item}) =>{
         return <TouchableOpacity onPress={() =>{}}>
-          <Image />
+          {/* <Image /> */}
+          <View 
+          style={{
+            width:dailPadSize,
+            borderWidth:item.value === ""? 0:1,
+            borderColor:"black",
+            borderRadius:dailPadSize,
+            justifyContent:"center",
+            alignItems:"center",
+            gap:10,
+            height:dailPadSize,
+
+            
+            }}
+            >
+            <Text style={{fontSize:dailPadSize * 0.4,color:"black"}}>{item.value}</Text>
+          </View>
 
 
         </TouchableOpacity>
       }}
       />
-          <View style={styles.dailPad}></View>
           
     </View>
   }
@@ -132,7 +134,6 @@ export default function PinSetup() {
     {/* <Footer/> */}
     <View style={styles.country__div}>
     <Text style={{fontSize:32,fontWeight:"600",flexWrap:"wrap",width:"90%",marginBottom:7}}>Pin setup noig</Text>
-    <Text style={{fontSize:13,fontWeight:"400",flexWrap:"wrap",width:"99%",marginBottom:10}}>Please enter the OTP sent to +23481 2345 5436</Text>
         <View style={{marginVertical:30,flexDirection:"row",justifyContent:"space-around",width:"100%"}}>
             
             <View>
@@ -204,8 +205,8 @@ export default function PinSetup() {
 
         </View>
 
-        <View style={{marginVertical:10,alignItems:"center",width:"100%"}}>
-            <Text  >Dail pad</Text>
+        <View style={{alignItems:"center",width:"100%"}}>
+           <Dailpad/>
 
         </View>
       
@@ -314,5 +315,6 @@ const styles = StyleSheet.create({
       textAlign:"left",
 
     },
+   
 
   });
