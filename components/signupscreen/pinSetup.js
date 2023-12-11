@@ -5,8 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { showMessage } from 'react-native-toast-message';
-import { Image } from 'react-native';
-
+import { MaterialIcons } from '@expo/vector-icons';
 
 const {width,height} = Dimensions.get('window')
 const dailPadSize =width * .2
@@ -72,33 +71,47 @@ export default function PinSetup() {
    
 
   const Dailpad = ()=>{
-    return  <View style={{height:height /2.3}}>
+    return  <View style={{ width:"100%",backgroundColor:"transparent",justifyContent:"center",alignItems:"center"}}>
       <FlatList
       style={{flexGrow:0}}
       scrollEnabled={false}
       numColumns={3}
-      columnWrapperStyle={{gap:10}}
+      columnWrapperStyle={{gap:20}}
       contentContainerStyle={{gap:10}}
       data={dailPad}
       keyExtractor={dailPad.id}
       renderItem={({item}) =>{
-        return <TouchableOpacity onPress={() =>{}}>
+        return <TouchableOpacity 
+        disabled={item.value === "" }
+        onPress={() =>{}}>
           {/* <Image /> */}
           <View 
           style={{
-            width:dailPadSize,
+            // width:dailPadSize,
+            width:60,
             borderWidth:item.value === ""? 0:1,
-            borderColor:"black",
+            borderColor:"#FFF",
             borderRadius:dailPadSize,
             justifyContent:"center",
             alignItems:"center",
             gap:10,
-            height:dailPadSize,
+            backgroundColor:item.value === ""? "transparent":"#FFF",
+            height:60,
+            shadowColor:item.value === ""? "": '#000000ef',
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.06,
+            shadowRadius: 40,
+            elevation:item.value === ""? 0: 1,
+            margin:13,
+
+            
+
 
             
             }}
             >
-            <Text style={{fontSize:dailPadSize * 0.4,color:"black"}}>{item.value}</Text>
+              {item.value === "del"? <MaterialIcons name="cancel" size={dailPadSize * 0.25} color="red" />:
+            <Text style={{fontSize:dailPadSize * 0.25,color:"#0075FE"}}>{item.value}</Text>}
           </View>
 
 
@@ -110,7 +123,7 @@ export default function PinSetup() {
   }
   const Authdiv = ()=>{
     
-    return  <View style={{height:height * 0.1,marginBottom:20, justifyContent:"center",paddingHorizontal:30,width:"100%" }}>
+    return  <View style={{height:height * 0.15,marginBottom:15, justifyContent:"center",paddingHorizontal:30,width:"100%" }}>
           <TouchableOpacity style={{flexDirection:"column",justifyContent:"space-between",gap:10,}}>
               <Pressable >
               <Text style={styles.create__btn}>
@@ -133,7 +146,9 @@ export default function PinSetup() {
     }}>
     {/* <Footer/> */}
     <View style={styles.country__div}>
-    <Text style={{fontSize:32,fontWeight:"600",flexWrap:"wrap",width:"90%",marginBottom:7}}>Pin setup noig</Text>
+    <Text style={{fontSize:32,fontWeight:"600",flexWrap:"wrap",width:"100%",marginBottom:7,textAlign:"center"}}>Set up your pin</Text>
+    <Text style={{fontSize:15,fontWeight:"400",flexWrap:"wrap",width:"100%",marginBottom:0,textAlign:"center"}}>Enter a 6-digit code you wont forget</Text>
+
         <View style={{marginVertical:30,flexDirection:"row",justifyContent:"space-around",width:"100%"}}>
             
             <View>
@@ -238,7 +253,7 @@ const styles = StyleSheet.create({
 
     },
     country__div:{
-      height:height * 0.3,
+      // height:height * 0.3,
       marginTop:20,
       alignItems:"flex-start",
       width:"100%",
