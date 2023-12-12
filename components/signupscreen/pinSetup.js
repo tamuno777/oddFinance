@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef,useState } from 'react';
 import { View ,StyleSheet,Dimensions, Text, Alert, TouchableOpacity, KeyboardAvoidingView, TextInput, FlatList} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar';
@@ -10,6 +10,50 @@ import { MaterialIcons } from '@expo/vector-icons';
 const {width,height} = Dimensions.get('window')
 const dailPadSize =width * .2
 export default function PinSetup() {
+  const [pin, setPin] = useState(['', '', '', '', '', '']); // Array to store individual pin values
+  const inputRefs = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+  ];
+
+  const handlePinChange = (value, index) => {
+    // Update the pin array at specific index
+    setPin((prevPin) => {
+      const newPin = [...prevPin];
+      newPin[index] = value;
+      return newPin;
+    });
+
+    // Focus on next input field if not the last one
+    if (index < 5) {
+      inputRefs[index + 1].current.focus();
+    } else {
+      // Do something with the PIN
+      console.log(`Entered PIN: ${pin.join('')}`);
+      // You can store the PIN in secure storage here
+      // and navigate to the next screen
+    }
+  };
+
+  const handleBackspace = () => {
+    const lastIndex = pin.length - 1;
+    if (lastIndex >= 0) {
+      setPin((prevPin) => {
+        const newPin = [...prevPin];
+        newPin[lastIndex] = '';
+        return newPin;
+      });
+
+      // Focus on previous input field
+      if (lastIndex > 0) {
+        inputRefs[lastIndex - 1].current.focus();
+      }
+    }
+  };
   const dailPad = [ 
     {
       id:"1",
@@ -83,8 +127,8 @@ export default function PinSetup() {
       renderItem={({item}) =>{
         return <TouchableOpacity 
         disabled={item.value === "" }
-        onPress={() =>{}}>
-          {/* <Image /> */}
+        onPress={() => handlePinChange(item.value, item.id)}
+        >
           <View 
           style={{
             // width:dailPadSize,
@@ -110,8 +154,8 @@ export default function PinSetup() {
             
             }}
             >
-              {item.value === "del"? <MaterialIcons name="cancel" size={dailPadSize * 0.25} color="red" />:
-            <Text style={{fontSize:dailPadSize * 0.25,color:"#0075FE"}}>{item.value}</Text>}
+              {item.value === "del"? <MaterialIcons onPress={handleBackspace} name="cancel" size={dailPadSize * 0.25} color="red" />:
+            <Text onPress={handlePinChange} style={{fontSize:dailPadSize * 0.25,color:"#0075FE"}}>{item.value}</Text>}
           </View>
 
 
